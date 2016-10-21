@@ -17,7 +17,8 @@ module.exports = React.createClass({
     onDragEnd: React.PropTypes.func,
     triggerOnChangeWhileDragging: React.PropTypes.bool,
     markerLabel: React.PropTypes.array,
-    displayFollowerPopover: React.PropTypes.bool
+    displayFollowerPopover: React.PropTypes.bool,
+    intervals: React.PropTypes.array
   },
 
   getInitialState: function () {
@@ -60,7 +61,8 @@ module.exports = React.createClass({
           onDragEnd={this.props.onDragEnd}
           triggerOnChangeWhileDragging={this.props.triggerOnChangeWhileDragging}
           ticks={this.props.ticks}
-          markerLabel={this.props.markerLabel} />
+          markerLabel={this.props.markerLabel}
+          intervals={this.props.intervals} />
         {follower}
       </div>
     )

@@ -93,6 +93,9 @@ Props:
 
 **`displayFollowerPopover`**: (`React.PropTypes.bool`) A boolean to show a floating label below the handle. Default false
 
+**`intervals`**: (`React.PropTypes.array`) An array with only values that can
+be set
+
 ## Contributing
 
 See CONTRIBUTING.md

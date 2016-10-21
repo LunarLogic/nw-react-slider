@@ -17,7 +17,8 @@ module.exports = React.createClass({
     onChange: React.PropTypes.func,
     onDragStart: React.PropTypes.func,
     onDragEnd: React.PropTypes.func,
-    markerLabel: React.PropTypes.array
+    markerLabel: React.PropTypes.array,
+    intervals: React.PropTypes.array
   },
 
   getDefaultProps: function () {
@@ -100,6 +101,29 @@ module.exports = React.createClass({
     this.setState({position})
   },
 
+  closestInterval(tickValue) {
+    var intervals = this.props.intervals;
+    var interval = intervals[0];
+    var i = 1;
+
+    while (i < intervals.length - 1 && intervals[i] <= tickValue) {
+      interval = intervals[i];
+      i = i + 1;
+    }
+
+    return interval;
+  },
+
+  nextInterval(interval) {
+    var intervals = this.props.intervals;
+    var i = 0;
+    while (i < intervals.length - 1 && intervals[i] <= interval) {
+      i = i + 1;
+    }
+
+    return intervals[i];
+  },
+
   updateValueFromPosition: function (newPosition) {
     var currentPosition = newPosition
     var value, position
@@ -111,7 +135,15 @@ module.exports = React.createClass({
       var currentPercent = currentPosition / this.state.trackWidth * 100
       var percentStep = 100 / (this.props.max - this.props.min)
       var closestSmallerValue = Math.floor(currentPercent / percentStep)
-      var closestLargerValue = closestSmallerValue + 1
+      if (this.props.intervals) {
+        closestSmallerValue = this.closestInterval(closestSmallerValue);
+      }
+      var closestLargerValue;
+      if (this.props.intervals) {
+        closestLargerValue = this.nextInterval(closestSmallerValue);
+      } else {
+        closestLargerValue = closestSmallerValue + 1
+      }
       var bestMatchPercent, bestMatchTick
 
       // determine which of the two values is closest
