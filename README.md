@@ -85,6 +85,12 @@ Props:
 
 **`onChange`**: (`React.PropTypes.func`) A function that will be fired when the position of the handle changes. Default none
 
+**`onDragStart`**: (`React.PropTypes.func`) A function that will be fired when the dragging handle starts. Default none
+
+**`onDragEnd`**: (`React.PropTypes.func`) A function that will be fired when the dragging handle ends. Default none
+
+**`triggerOnChangeWhileDragging`**: (`React.PropTypes.bool`) A boolean to determine if fire onChange while dragging. Default false
+
 **`displayFollowerPopover`**: (`React.PropTypes.bool`) A boolean to show a floating label below the handle. Default false
 
 ## Contributing
